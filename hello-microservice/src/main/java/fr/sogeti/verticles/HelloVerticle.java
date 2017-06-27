@@ -2,6 +2,7 @@ package fr.sogeti.verticles;
 
 import com.github.kennedyoliveira.hystrix.contrib.vertx.metricsstream.EventMetricsStreamHandler;
 import fr.sogeti.FailExampleCommand;
+import fr.sogeti.FallBackCommand;
 import fr.sogeti.HelloExampleCommand;
 import fr.sogeti.TimeoutExampleCommand;
 import io.vertx.core.AbstractVerticle;
@@ -25,6 +26,8 @@ public class HelloVerticle extends AbstractVerticle {
         router.route("/hello").handler(HelloExampleCommand::handle);
         
         router.route("/timeout").handler(TimeoutExampleCommand::handle);
+        
+        router.route("/fallback").handler(FallBackCommand::handle);
         
         router.get(EventMetricsStreamHandler.DEFAULT_HYSTRIX_PREFIX)
               .handler(EventMetricsStreamHandler.createHandler());
